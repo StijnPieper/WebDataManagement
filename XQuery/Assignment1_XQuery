@@ -1,0 +1,97 @@
+xquery version "3.0";
+
+let $ms:=doc("movies_alone.xml"), 
+    $as:=doc("artists_alone.xml")
+    
+(: 
+for $x in $ms//movie
+return <movie>{$x/title} {$x/year}</movie> :)
+
+(: 
+return <results>
+{
+for $x in $ms//movie/actor
+return  <result>
+            {$x/parent::movie/title} 
+            <role>{$x/@role/string()}</role>
+        </result>
+}
+</results>
+:)
+
+(: 
+for $x in $ms//movie
+where $x/director/@id = $x/actor/@id
+return $x/title
+:)
+
+(: 
+for $x in distinct-values($ms//actor/@id)
+(: For full list remove following condition :)
+where count($ms//movie[actor/@id = $x]) > 1
+return <actor>{$x},
+{
+    for $y in $ms//movie
+    where $y/actor/@id = $x
+    return $y/title
+}
+</actor>
+:)
+
+(: 
+for $x in $ms//movie
+let $y := $as//artist[@id = $x/director/@id]
+return <movie>
+        {$x/title} 
+        <director>
+            {$y/concat(first_name, ' ', last_name)}
+        </director>
+        </movie>
+:)
+
+(: 
+for $x in $ms//movie
+return <title>{$x/title/text()}
+    <actors>
+    {
+        for $y in $x//actor
+        return <actor>
+            {$as//artist[@id = $y/@id]/concat(first_name, 
+                ' ', last_name)} as {$y/@role/string()}
+            </actor>
+    }
+    </actors>
+    </title>
+:)
+
+(: 
+for $x in $ms//movie
+let $a := $x//actor[1],  $b := $x//actor[2]
+where count($x//actor)>=2
+return <result>
+        {$x/title}
+        <actor>
+        {$as//artist[@id = $a/@id]/concat(first_name, 
+           ' ', last_name)} as {$a/@role/string()}
+        </actor>
+        <actor>
+        {$as//artist[@id = $b/@id]/concat(first_name, 
+            ' ', last_name)} as {$b/@role/string()}
+        </actor>
+        {if ($x//count(actor) > 2) then <et-al/> else()}
+</result>
+:)
+
+(: 
+
+for $x in $ms//movie[director/@id = 
+        $as//artist[last_name = 'Eastwood' 
+        and first_name='Clint']/@id]
+where $x/year >= 1990
+order by $x/title
+return <result>{$x/title} {$x/year}</result>
+
+:)
+
+
+

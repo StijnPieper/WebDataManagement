@@ -1,0 +1,64 @@
+xquery version "3.0";
+
+(: 
+
+/movies
+
+//title
+
+//movie/title/text()
+
+//movie[year/text() >= 2000]/title/text()
+
+//movie[title/text() = 'Spider-Man']/summary/text() 
+
+//movie[title/text() = 'Spider-Man']/summary/text()
+
+(: Normal :)
+//movie[title/text()='Heat']/director/ 
+    concat(first_name/text(), ' ', last_name/text())
+(: Refs :)
+//artist[@id = //movie[title/text()='Heat']/director/@id]/
+    concat(first_name/text(), ' ', last_name/text())
+
+(: Normal :)
+//actor[first_name = 'Kirsten' and last_name='Dunst']/
+    parent::movie/title/text()
+  
+(: Refs :)
+//movie[actor/@id = //artist[first_name = 'Kirsten' and 
+    last_name='Dunst']/@id]/title/text()
+
+
+//movie[summary]/summary/text()
+
+
+//movie[title/text() = 'Unforgiven']/
+    actor[first_name = 'Clint' and last_name = 'Eastwood']
+    /role/text()     
+
+//movie[title/text() = '']/actor[@id = 
+    //artist[first_name = 'Clint' and last_name = 'Eastwood']/@id]/
+    @role/string()
+
+
+//movie[title/text() = 'Marie Antoinette']/preceding::movie[1]/title/text()
+
+
+
+//movie[contains(title/text(), 'V')]/title/text()
+
+
+
+//movie[count(actor) = 3]/title/text()
+
+:)
+
+
+
+
+
+
+
+
+
