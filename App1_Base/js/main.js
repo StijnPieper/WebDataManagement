@@ -1,5 +1,5 @@
-var base_url = 'http://localhost:8080/exist/rest/db/apps/XMovie/movies.xql';
-var base_params = {_xsl : '/db/apps/XMovie/movie_style.xsl'};
+var base_url = 'http://localhost:8080/exist/rest/db/apps/XMovieApp/movies.xql';
+var base_params = {_xsl : '/db/apps/XMovieApp/movie_style.xsl'};
 
 function init(){
     $('#btn_search').on('click', sendSearch);
@@ -31,7 +31,10 @@ function sendSearch(){
     var payload = {
             action : 'search',
             title : $('#input_title').val(), 
-            summary : $('#input_summary').val()
+            years : $('#input_years').val(),
+            director : $('#input_director').val(), 
+            actors : $('#input_actors').val(),
+            summary : $('#input_actors').val()
     };
     sendPayload(payload);
 }
