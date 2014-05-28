@@ -1,0 +1,67 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <xsl:output method="html" encoding="utf-8"/>
+    <xsl:template match="movie-list[not(title)]">
+        <p class="movie_list_header">No relevant movies found.</p>
+    </xsl:template>
+    <xsl:template match="movie-list[title]">
+        <p class="movie_list_header">Relevant movies are (click for details):</p>
+        <ul class="movie_list">
+            <xsl:apply-templates select="title"/>
+        </ul>
+    </xsl:template>
+    <xsl:template match="movie-list/title">
+        <li>
+            <a class="movie_title">
+                <xsl:value-of select="."/>
+            </a>
+        </li>
+    </xsl:template>
+    <xsl:template match="movie">
+        <div class="movie">
+            <div class="title">
+                <xsl:value-of select="title"/>
+                <span class="year">(<xsl:value-of select="year"/>)</span>
+            </div>
+            <div class="country">
+                <span class="country-label">Country:</span>
+                <xsl:value-of select="country"/>
+            </div>
+            <div class="genre">
+                <span class="genre-label">Genre:</span>
+                <xsl:value-of select="genre"/>
+            </div>
+            <div class="summary">
+                <span class="summary-label">Summary:</span>
+                <span class="summary-content">
+                    <xsl:value-of select="summary"/>
+                </span>
+            </div>
+            <div class="director">
+                <span class="director-label">Director:</span>
+                <span class="first">
+                    <xsl:value-of select="director/first_name"/>
+                </span>
+                <span class="last">
+                    <xsl:value-of select="director/last_name"/>
+                </span>
+            </div>
+            <div class="actors">
+                <span class="actors-label">Starring:</span>
+                <xsl:apply-templates select="actor"/>
+            </div>
+        </div>
+    </xsl:template>
+    <xsl:template match="movie/actor">
+        <p class="actor">
+            <span class="first">
+                <xsl:value-of select="first_name"/>
+            </span>
+            <span class="last">
+                <xsl:value-of select="last_name"/>
+            </span>
+        as <i>
+                <xsl:value-of select="role"/>
+            </i>
+        </p>
+    </xsl:template>
+</xsl:stylesheet>

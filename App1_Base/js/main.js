@@ -34,7 +34,7 @@ function sendSearch(){
             years : $('#input_years').val(),
             director : $('#input_director').val(), 
             actors : $('#input_actors').val(),
-            summary : $('#input_actors').val()
+            summary : $('#input_summary').val()
     };
     sendPayload(payload);
 }

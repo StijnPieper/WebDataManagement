@@ -8,8 +8,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
         <style>
-            div.movie p {
-                display:block;
+            div.title {
+                font-size: 2em;
+                font-weight:bold;
+            }
+            .year {
+                padding-left:0.7em;
+            }
+            div span[class*='label'] {
+                font-weight:bold;
+                padding-right:1em;
+            }
+            span.summary-content{
+               display:block;
+               padding-left:5em;
+            }
+            
+            p.actor{
+                padding-left: 5em;
             }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
@@ -82,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <div id="div_results">Results are going to be displayed here if its the last thing i do!!</div>
+                    <div id="div_results">Results are going to be displayed here if it is the last thing I do!!</div>
                 </div>
             </div>
         </div>

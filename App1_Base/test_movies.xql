@@ -61,20 +61,11 @@ declare function local:search_by_summary($movies as node()*, $keywords as xs:str
     else $movies
 };
 
-let $action := lower-case(xs:string(request:get-parameter("action", ""))),
-    $movies := doc('/db/movies/movies.xml')//movie
-return 
-    if ($action = 'search') then
-        let $title := lower-case(xs:string(request:get-parameter("title", ""))),
-            $years := xs:string(request:get-parameter("years", "")),
-            $director := lower-case(xs:string(request:get-parameter("director", ""))),
-            $actors := lower-case(xs:string(request:get-parameter("actors", ""))),
-            $summary := lower-case(xs:string(request:get-parameter("summary", "")))
-        return
-            <movie-list>
-            {local:search($movies, $title, $years, $director, $actors, $summary)//title}
-            </movie-list>
-    else 
-        $movies[title/text() = request:get-parameter("title", "")]
+
+
+let $movies := doc('/db/movies/movies.xml')//movie
+return $movies[title/text() = "Unforgiven"]
+
+(:kirsten dunst, willem dafoe:)
 
 
