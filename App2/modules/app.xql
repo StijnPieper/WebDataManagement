@@ -331,11 +331,13 @@ declare function local:display-part($play as node(), $char as xs:string, $desire
     let $acts := if ($desired_act) then 
                     $play//ACT[position() = xs:int($desired_act)] 
                  else $play//ACT[descendant::SPEAKER/text() = $char]
-    for $act at $i in $acts return
+    for $act at $i in $acts
+    let $params := concat('play=',encode-for-uri($play//PLAYSUBT/text()),
+                    '&amp;', 'act=', index-of($play//ACT, $act)) return
         <div class="accordion-group panel panel-default">
             <div class="accordion-heading panel-heading">
               <h4 class="panel-title">
-                <a>{$act/TITLE/text()}</a>
+                <a href="index.html?{$params}">{$act/TITLE/text()}</a>
                   <a class="accordion-toggle {if (count($acts)>1) then 'collapsed' else ()}" 
                     data-toggle="collapse" 
                     data-parent="#accordion_acts"
@@ -351,8 +353,10 @@ declare function local:display-part($play as node(), $char as xs:string, $desire
                     let $scenes := if ($desired_scene) then 
                                         $act/SCENE[position() = xs:int($desired_scene)] 
                                    else $act/SCENE[descendant::SPEAKER/text() = $char]
-                    for $scene at $j in $scenes return 
-                        local:display-scene($char, $scene, $i, $j, boolean(count($scenes)>1))
+                    for $scene at $j in $scenes return
+                        let $full_params := concat($params, 
+                            '&amp;', 'scene=', index-of($act/SCENE, $scene)) return
+                        local:display-scene($char, $scene, $i, $j, $full_params, boolean(count($scenes)>1))
                     }
                     </div>
                 </div>
@@ -362,11 +366,11 @@ declare function local:display-part($play as node(), $char as xs:string, $desire
    </div>
 };
 
-declare function local:display-scene($char as xs:string, $scene as node(), $act_no as xs:int, $scene_no as xs:int, $closed as xs:boolean){
+declare function local:display-scene($char as xs:string, $scene as node(), $act_no as xs:int, $scene_no as xs:int, $url_params as xs:string, $closed as xs:boolean){
    <div class="accordion-group panel panel-default">
     <div class="accordion-heading panel-heading">
         <h4 class="panel-title">
-          <a>{$scene/TITLE/substring-before(text(), '.')}</a>
+          <a href="index.html?{$url_params}">{$scene/TITLE/substring-before(text(), '.')}</a>
           <a class="accordion-toggle {if ($closed) then 'collapsed' else ()}" 
               data-toggle="collapse" 
               data-parent="#accordion_act{$act_no}" 
