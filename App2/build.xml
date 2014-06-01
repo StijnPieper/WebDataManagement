@@ -1,6 +1,7 @@
-<project default="xar" name="OperaOmnia">
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="xar" name="App2">
     <property name="project.version" value="0.1"/>
-    <property name="project.app" value="OperaOmnia"/>
+    <property name="project.app" value="App2"/>
     <property name="build.dir" value="build"/>
     <target name="xar">
         <mkdir dir="${build.dir}"/>
