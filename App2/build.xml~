@@ -1,7 +1,13 @@
-
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="xar" name="App2">
+    <property name="project.version" value="0.1"/>
+    <property name="project.app" value="App2"/>
+=======
 <project default="xar" name="OperaOmnia">
     <property name="project.version" value="0.1"/>
     <property name="project.app" value="OperaOmnia"/>
+>>>>>>> ed91aea38d8681fdaec0f3c5e185bf3836ed9488
     <property name="build.dir" value="build"/>
     <target name="xar">
         <mkdir dir="${build.dir}"/>

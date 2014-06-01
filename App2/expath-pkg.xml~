@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://expath.org/ns/pkg" name="http://App2.org" abbrev="App2" version="0.1" spec="1.0">
+    <title>App2</title>
+=======
 <package xmlns="http://expath.org/ns/pkg" name="localhost:8080/exist/apps/OperaOmniaApp" abbrev="OperaOmnia" version="0.1" spec="1.0">
     <title>OperaOmniaApp</title>
+>>>>>>> ed91aea38d8681fdaec0f3c5e185bf3836ed9488
     <dependency package="http://exist-db.org/apps/shared"/>
 </package>
