@@ -1,0 +1,26 @@
+/* Application styles could go here */
+body{
+    background: none;
+}
+
+#container_main{
+    margin-top:70px;
+}
+
+.accordion-heading a.accordion-toggle:after {
+    font-family: 'FontAwesome';
+    content: "Hide \f078";    
+    float: right; 
+    color: grey; 
+}
+.accordion-heading a.accordion-toggle.collapsed:after {
+    content: "Show \f054";
+}
+
+.accordion-inner .row{
+    margin-left:0;
+}
+
+.stagedir{
+    font-weight:700;
+}
